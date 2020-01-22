@@ -115,15 +115,15 @@ const fg = {
 // BIRD
 const bird = {
     animation : [
-        {sX: 276, sY : 112},
-        {sX: 276, sY : 139},
-        {sX: 276, sY : 164},
-        {sX: 276, sY : 139}
+        {sX: 405, sY : 112},
+        {sX: 405, sY : 180},
+        {sX: 405, sY : 248},
+        {sX: 405, sY : 112}
     ],
     x : 50,
     y : 150,
-    w : 34,
-    h : 26,
+    w : 84,
+    h : 66,
     
     radius : 12,
     
@@ -174,10 +174,10 @@ const bird = {
             
             // IF THE SPEED IS GREATER THAN THE JUMP MEANS THE BIRD IS FALLING DOWN
             if(this.speed >= this.jump){
-                this.rotation = 90 * DEGREE;
+                this.rotation = 10 * DEGREE;
                 this.frame = 1;
             }else{
-                this.rotation = -25 * DEGREE;
+                this.rotation = -20 * DEGREE;
             }
         }
         
