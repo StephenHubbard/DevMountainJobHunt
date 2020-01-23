@@ -40,11 +40,17 @@ const YAMAHA = new Audio();
 YAMAHA.src = "audio/yamaha.mp3";
 
 const icons = new Image();
-icons.src = "img/socket-icon.png"
+icons.src = "img/html5-icon.png"
 
 const icons_src = [
     HTML5 = "img/html5-icon.png",
-    socketio = "img/socket-icon.png"
+    socketio = "img/socket-icon.png",
+    CSS3 = "img/css3-icon.png",
+    react = "img/react-icon.png",
+    javascript = "img/javascript-icon.png",
+    heroku = "img/heroku-icon.png",
+    nodejs = "img/nodejs-icon.png",
+    postgresql = "img/postgres-icon.png"
 ]
 
 const pianos = new Image();
@@ -58,6 +64,8 @@ const pianos_src = [
 
 const devMtnLogo = new Image();
 devMtnLogo.src = "img/devmountain-logo.png";
+
+
 
 // GAME STATE
 const state = {
@@ -251,7 +259,12 @@ const gameOver = {
     
     draw: function(){
         if(state.current == state.over){
-            ctx.drawImage(sprite, this.sX, this.sY, this.w, this.h, this.x, this.y, this.w, this.h);   
+            ctx.drawImage(sprite, this.sX, this.sY, this.w, this.h, this.x, this.y, this.w, this.h);  
+
+            const deniedIcon = new Image();
+            deniedIcon.src = "img/denied.png";
+
+            ctx.drawImage(deniedIcon, 0, 0, 500, 500, this.x + 15, this.y + 40, 120, 120) 
         }
     }
     
@@ -398,7 +411,7 @@ const pipes = {
             // if the pipes go beyond canvas, we delete them from the array
             if(p.x + this.w <= 0){
                 this.position.shift();
-                let randomNumber = Math.round(Math.random())
+                let randomNumber = Math.floor(Math.random() * 7)
                 icons.src = icons_src[randomNumber]
                 score.best = Math.max(score.value, score.best);
                 localStorage.setItem("best", score.best);
@@ -440,6 +453,8 @@ const score= {
             // BEST SCORE
             ctx.fillText(this.best.toFixed(1), 190, 228);
             ctx.strokeText(this.best.toFixed(1), 190, 228);
+
+            
         }
     },
     
