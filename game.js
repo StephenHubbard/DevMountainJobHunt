@@ -26,6 +26,10 @@ SWOOSHING.src = "audio/sfx_swooshing.wav";
 const DIE = new Audio();
 DIE.src = "audio/sfx_die.wav";
 
+const images = {
+    vue: "assets/vue-logo.png",
+}
+
 // GAME STATE
 const state = {
     current : 0,
@@ -115,14 +119,14 @@ const fg = {
 // BIRD
 const bird = {
     animation : [
-        {sX: 405, sY : 112},
+        {sX: 405, sY : 113},
         {sX: 405, sY : 180},
         {sX: 405, sY : 248},
-        {sX: 405, sY : 112}
+        {sX: 405, sY : 113}
     ],
     x : 50,
     y : 150,
-    w : 84,
+    w : 90,
     h : 66,
     
     radius : 12,
@@ -168,7 +172,7 @@ const bird = {
                 this.y = cvs.height - fg.h - this.h/2;
                 if(state.current == state.game){
                     state.current = state.over;
-                    DIE.play();
+                    HIT.play();
                 }
             }
             
@@ -221,6 +225,14 @@ const gameOver = {
     
 }
 
+const socketImg = {
+    sX: 278,
+    sY: 115,
+    w: 38,
+    h: 38,
+    
+}
+
 // PIPES
 const pipes = {
     position : [],
@@ -236,7 +248,7 @@ const pipes = {
     
     w : 53,
     h : 400,
-    gap : 85,
+    gap : 100,
     maxYPos : -150,
     dx : 2,
     
@@ -251,7 +263,10 @@ const pipes = {
             ctx.drawImage(sprite, this.top.sX, this.top.sY, this.w, this.h, p.x, topYPos, this.w, this.h);  
             
             // bottom pipe
-            ctx.drawImage(sprite, this.bottom.sX, this.bottom.sY, this.w, this.h, p.x, bottomYPos, this.w, this.h);  
+            ctx.drawImage(sprite, this.bottom.sX, this.bottom.sY, this.w, this.h, p.x, bottomYPos, this.w, this.h); 
+            
+            // icon
+            ctx.drawImage(sprite, socketImg.sX, socketImg.sY, socketImg.w, socketImg.h, p.x + 4, bottomYPos - 70, 50, 50);
         }
     },
     
