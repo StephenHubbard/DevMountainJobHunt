@@ -26,9 +26,12 @@ SWOOSHING.src = "audio/sfx_swooshing.wav";
 const DIE = new Audio();
 DIE.src = "audio/sfx_die.wav";
 
-const images = {
-    vue: "assets/vue-logo.png",
-}
+const icons = new Image();
+
+const icons_src = [
+    vue = "img/vue-logo.png",
+    socketio = "img/socket-icon.png"
+]
 
 // GAME STATE
 const state = {
@@ -250,7 +253,7 @@ const pipes = {
     h : 400,
     gap : 100,
     maxYPos : -150,
-    dx : 2,
+    dx : 4,
     
     draw : function(){
         for(let i  = 0; i < this.position.length; i++){
@@ -265,8 +268,9 @@ const pipes = {
             // bottom pipe
             ctx.drawImage(sprite, this.bottom.sX, this.bottom.sY, this.w, this.h, p.x, bottomYPos, this.w, this.h); 
             
-            // icon
-            ctx.drawImage(sprite, socketImg.sX, socketImg.sY, socketImg.w, socketImg.h, p.x + 4, bottomYPos - 70, 50, 50);
+            // icon(s)
+            
+            ctx.drawImage(icons, 0, 0, 400, 400, p.x + 4, bottomYPos - 70, 50, 50);
         }
     },
     
@@ -304,6 +308,8 @@ const pipes = {
                 this.position.shift();
                 score.value += 1;
                 SCORE_S.play();
+                let randomNumber = Math.round(Math.random())
+                icons.src = icons_src[randomNumber]
                 score.best = Math.max(score.value, score.best);
                 localStorage.setItem("best", score.best);
             }
