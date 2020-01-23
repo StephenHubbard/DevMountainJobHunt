@@ -47,7 +47,7 @@ const icons_src = [
 ]
 
 const pianos = new Image();
-pianos.src = "img/piano1.png"
+pianos.src = "img/piano1.png";
 
 const pianos_src = [
     one = "img/piano1.png",
