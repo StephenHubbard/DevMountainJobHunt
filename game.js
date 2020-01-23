@@ -65,6 +65,9 @@ const pianos_src = [
 const devMtnLogo = new Image();
 devMtnLogo.src = "img/devmountain-logo.png";
 
+let audioPlayed = false;
+
+
 
 
 // GAME STATE
@@ -260,11 +263,32 @@ const gameOver = {
     draw: function(){
         if(state.current == state.over){
             ctx.drawImage(sprite, this.sX, this.sY, this.w, this.h, this.x, this.y, this.w, this.h);  
-
-            const deniedIcon = new Image();
-            deniedIcon.src = "img/denied.png";
-
-            ctx.drawImage(deniedIcon, 0, 0, 500, 500, this.x + 15, this.y + 40, 120, 120) 
+            ctx.drawImage(sprite, 277, 170, 130, 50, this.x + 50, this.y - 80, 130, 60);  
+            if(score.value > 100 && score.value < 300) {
+                if (audioPlayed === false) {
+                    YAMAHA.play();
+                    audioPlayed = true;
+                }
+                const crystalball = new Image();
+                crystalball.src = "img/crystalball.png"
+                ctx.drawImage(crystalball, 0, 0, 400, 400, this.x + 15, this.y + 45, 110, 110)
+            } else if (score.value > 300) {
+                if (audioPlayed === false) {
+                    BOSENDORFER.play()
+                    audioPlayed = true;
+                }
+                const hired = new Image();
+                hired.src = "img/hired.png"
+                ctx.drawImage(hired, 0, 0, 400, 400, this.x + 15, this.y + 45, 110, 110)
+            } else {
+                if (audioPlayed === false) {
+                    CASIO.play()
+                    audioPlayed = true;
+                }
+                const theworst = new Image();
+                theworst.src = "img/theworst.png";
+                ctx.drawImage(theworst, 0, 0, 400, 400, this.x + 15, this.y + 40, 120, 120) 
+            }
         }
     }
     
@@ -297,6 +321,8 @@ const drawPianos = {
     }, 
 
     update: function(){
+
+
         if(state.current !== state.game) return;
         
         if(frames%100 == 0){
@@ -460,6 +486,7 @@ const score= {
     
     reset : function(){
         this.value = 0;
+        audioPlayed = false;
     }
 }
 
