@@ -9,6 +9,6 @@ app.use(bodyParser.urlencoded({ extended: true}));
 app.use(express.static('./'))
 
 
-app.listen(4545, () => {
+app.listen(process.env.PORT || 5000, () => {
     console.log("Listening on port 4545")
 })
