@@ -30,14 +30,7 @@ SWOOSHING.src = "audio/sfx_swooshing.wav";
 const DIE = new Audio();
 DIE.src = "audio/sfx_die.wav";
 
-const CASIO = new Audio();
-CASIO.src = "audio/casio.mp3";
 
-const BOSENDORFER = new Audio();
-BOSENDORFER.src = "audio/bosendorfer.mp3";
-
-const YAMAHA = new Audio();
-YAMAHA.src = "audio/yamaha.mp3";
 
 const icons = new Image();
 icons.src = "img/html5-icon.png"
@@ -266,7 +259,6 @@ const gameOver = {
             ctx.drawImage(sprite, 277, 170, 130, 50, this.x + 50, this.y - 80, 130, 60);  
             if(score.value > 100 && score.value < 300) {
                 if (audioPlayed === false) {
-                    YAMAHA.play();
                     audioPlayed = true;
                 }
                 const crystalball = new Image();
@@ -274,7 +266,6 @@ const gameOver = {
                 ctx.drawImage(crystalball, 0, 0, 400, 400, this.x + 15, this.y + 45, 110, 110)
             } else if (score.value > 300) {
                 if (audioPlayed === false) {
-                    BOSENDORFER.play()
                     audioPlayed = true;
                 }
                 const hired = new Image();
@@ -282,7 +273,6 @@ const gameOver = {
                 ctx.drawImage(hired, 0, 0, 400, 400, this.x + 15, this.y + 45, 110, 110)
             } else {
                 if (audioPlayed === false) {
-                    CASIO.play()
                     audioPlayed = true;
                 }
                 const theworst = new Image();
