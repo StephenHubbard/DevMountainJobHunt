@@ -334,32 +334,16 @@ const drawPianos = {
         for(let i = 0; i < this.position.length; i++){
             let p = this.position[i];
             
-            // let bottomPipeYPos = p.y + this.h + this.gap;
-            
-            // COLLISION DETECTION
-            // TOP PIPE
-            // if(bird.x + bird.radius > p.x && bird.x - bird.radius < p.x + this.w && bird.y + bird.radius > p.y && bird.y - bird.radius < p.y + this.h){
-            //     state.current = state.over;
-            //     HIT.play();
-            // }
-            // BOTTOM PIPE
-            // if(bird.x + bird.radius > p.x && bird.x - bird.radius < p.x + this.w && bird.y + bird.radius > bottomPipeYPos && bird.y - bird.radius < bottomPipeYPos + this.h){
-            //     state.current = state.over;
-            //     HIT.play();
-            // }
-            
-            // MOVE THE PIPES TO THE LEFT
+
             p.x -= this.dx;
             
-            // if the pipes go beyond canvas, we delete them from the array
+            // if the pianos go beyond canvas, we delete them from the array
             if((p.x + 50)+ this.w <= 0){
                 this.position.shift();
                 let randomNumber = Math.floor(Math.random() * 3 + 0)
                 pianos.src = pianos_src[randomNumber]
                 score.value += .1;
                 COIN.play();
-                // score.best = Math.max(score.value, score.best);
-                // localStorage.setItem("best", score.best);
             }
         }
     },
@@ -435,6 +419,10 @@ const pipes = {
             p.x -= this.dx;
             
             // if the pipes go beyond canvas, we delete them from the array
+            if((p.x - 130) + this.w <= 0){
+                icons.src = ""
+                SCORE_S.play();
+            }
             if(p.x + this.w <= 0){
                 this.position.shift();
                 let randomNumber = Math.floor(Math.random() * 7)
@@ -444,7 +432,6 @@ const pipes = {
             }
             if((p.x - 100) + this.w <= 0){
                 score.value += 1;
-                SCORE_S.play();
 
             }
         }
