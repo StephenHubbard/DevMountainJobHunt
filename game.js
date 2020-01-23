@@ -14,6 +14,10 @@ sprite.src = "img/sprite.png";
 const SCORE_S = new Audio();
 SCORE_S.src = "audio/sfx_point.wav";
 
+const COIN = new Audio();
+COIN.src = "audio/coin.wav";
+COIN.volume = .5;
+
 const FLAP = new Audio();
 FLAP.src = "audio/sfx_flap.wav";
 
@@ -26,12 +30,34 @@ SWOOSHING.src = "audio/sfx_swooshing.wav";
 const DIE = new Audio();
 DIE.src = "audio/sfx_die.wav";
 
+const CASIO = new Audio();
+CASIO.src = "audio/casio.mp3";
+
+const BOSENDORFER = new Audio();
+BOSENDORFER.src = "audio/bosendorfer.mp3";
+
+const YAMAHA = new Audio();
+YAMAHA.src = "audio/yamaha.mp3";
+
 const icons = new Image();
+icons.src = "img/socket-icon.png"
 
 const icons_src = [
-    vue = "img/vue-logo.png",
+    HTML5 = "img/html5-icon.png",
     socketio = "img/socket-icon.png"
 ]
+
+const pianos = new Image();
+pianos.src = "img/piano1.png"
+
+const pianos_src = [
+    one = "img/piano1.png",
+    two = "img/piano2.png",
+    three = "img/piano3.png"
+]
+
+const devMtnLogo = new Image();
+devMtnLogo.src = "img/devmountain-logo.png";
 
 // GAME STATE
 const state = {
@@ -104,12 +130,14 @@ const fg = {
     x: 0,
     y: cvs.height - 112,
     
-    dx : 2,
+    dx : 4,
     
     draw : function(){
         ctx.drawImage(sprite, this.sX, this.sY, this.w, this.h, this.x, this.y, this.w, this.h);
         
         ctx.drawImage(sprite, this.sX, this.sY, this.w, this.h, this.x + this.w, this.y, this.w, this.h);
+        
+        ctx.drawImage(devMtnLogo, 0, 0, 1000, 200, 30, 405, cvs.width - 50, cvs.height * .13)
     },
     
     update: function(){
@@ -118,6 +146,7 @@ const fg = {
         }
     }
 }
+
 
 // BIRD
 const bird = {
@@ -228,12 +257,73 @@ const gameOver = {
     
 }
 
-const socketImg = {
-    sX: 278,
-    sY: 115,
-    w: 38,
-    h: 38,
+const drawPianos = {
+    position : [],
     
+    top : {
+        sX : 553,
+        sY : 0
+    },
+    bottom:{
+        sX : 502,
+        sY : 0
+    },
+    
+    w : 53,
+    h : 400,
+    gap : 100,
+    maxYPos : -150,
+    dx : 4,
+
+    draw: function() {
+        for(let i  = 0; i < this.position.length; i++){
+            let p = this.position[i];
+
+            ctx.drawImage(pianos, 0, 0, 400, 400, p.x + 200, 200, 70, 70)
+        }
+    }, 
+
+    update: function(){
+        if(state.current !== state.game) return;
+        
+        if(frames%100 == 0){
+            this.position.push({
+                x : cvs.width,
+                y : this.maxYPos * ( Math.random() + 1)
+            });
+        }
+        for(let i = 0; i < this.position.length; i++){
+            let p = this.position[i];
+            
+            // let bottomPipeYPos = p.y + this.h + this.gap;
+            
+            // COLLISION DETECTION
+            // TOP PIPE
+            // if(bird.x + bird.radius > p.x && bird.x - bird.radius < p.x + this.w && bird.y + bird.radius > p.y && bird.y - bird.radius < p.y + this.h){
+            //     state.current = state.over;
+            //     HIT.play();
+            // }
+            // BOTTOM PIPE
+            // if(bird.x + bird.radius > p.x && bird.x - bird.radius < p.x + this.w && bird.y + bird.radius > bottomPipeYPos && bird.y - bird.radius < bottomPipeYPos + this.h){
+            //     state.current = state.over;
+            //     HIT.play();
+            // }
+            
+            // MOVE THE PIPES TO THE LEFT
+            p.x -= this.dx;
+            
+            // if the pipes go beyond canvas, we delete them from the array
+            if((p.x + 50)+ this.w <= 0){
+                this.position.shift();
+                let randomNumber = Math.floor(Math.random() * 3 + 0)
+                pianos.src = pianos_src[randomNumber]
+                score.value += .1;
+                COIN.play();
+                // score.best = Math.max(score.value, score.best);
+                // localStorage.setItem("best", score.best);
+            }
+        }
+    },
 }
 
 // PIPES
@@ -271,6 +361,8 @@ const pipes = {
             // icon(s)
             
             ctx.drawImage(icons, 0, 0, 400, 400, p.x + 4, bottomYPos - 70, 50, 50);
+
+        
         }
     },
     
@@ -306,12 +398,15 @@ const pipes = {
             // if the pipes go beyond canvas, we delete them from the array
             if(p.x + this.w <= 0){
                 this.position.shift();
-                score.value += 1;
-                SCORE_S.play();
                 let randomNumber = Math.round(Math.random())
                 icons.src = icons_src[randomNumber]
                 score.best = Math.max(score.value, score.best);
                 localStorage.setItem("best", score.best);
+            }
+            if((p.x - 100) + this.w <= 0){
+                score.value += 1;
+                SCORE_S.play();
+
             }
         }
     },
@@ -334,17 +429,17 @@ const score= {
         if(state.current == state.game){
             ctx.lineWidth = 2;
             ctx.font = "35px Teko";
-            ctx.fillText(this.value, cvs.width/2, 50);
-            ctx.strokeText(this.value, cvs.width/2, 50);
+            ctx.fillText(this.value.toFixed(1), cvs.width/2, 50);
+            ctx.strokeText(this.value.toFixed(1), cvs.width/2, 50);
             
         }else if(state.current == state.over){
             // SCORE VALUE
             ctx.font = "25px Teko";
-            ctx.fillText(this.value, 225, 186);
-            ctx.strokeText(this.value, 225, 186);
+            ctx.fillText(this.value.toFixed(1), 190, 186);
+            ctx.strokeText(this.value.toFixed(1), 190, 186);
             // BEST SCORE
-            ctx.fillText(this.best, 225, 228);
-            ctx.strokeText(this.best, 225, 228);
+            ctx.fillText(this.best.toFixed(1), 190, 228);
+            ctx.strokeText(this.best.toFixed(1), 190, 228);
         }
     },
     
@@ -360,6 +455,7 @@ function draw(){
     
     bg.draw();
     pipes.draw();
+    drawPianos.draw();
     fg.draw();
     bird.draw();
     getReady.draw();
@@ -372,6 +468,7 @@ function update(){
     bird.update();
     fg.update();
     pipes.update();
+    drawPianos.update();
 }
 
 // LOOP
