@@ -10,5 +10,5 @@ app.use(express.static('./'))
 
 
 app.listen(process.env.PORT || 5000, () => {
-    console.log("Listening on port 4545")
+    console.log("Listening on port 5000")
 })
