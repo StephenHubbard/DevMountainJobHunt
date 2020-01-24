@@ -30,6 +30,14 @@ SWOOSHING.src = "audio/sfx_swooshing.wav";
 const DIE = new Audio();
 DIE.src = "audio/sfx_die.wav";
 
+const crystalball = new Image();
+crystalball.src = "img/crystalball.png";
+
+const hired = new Image();
+hired.src = "img/hired.png";
+
+const theworst = new Image();
+theworst.src = "img/theworst.png";
 
 
 const icons = new Image();
@@ -261,23 +269,20 @@ const gameOver = {
             if(score.value > 100 && score.value < 300) {
                 if (audioPlayed === false) {
                     audioPlayed = true;
+                    
                 }
-                const crystalball = new Image();
-                crystalball.src = "img/crystalball.png"
                 ctx.drawImage(crystalball, 0, 0, 400, 400, this.x + 15, this.y + 45, 110, 110)
             } else if (score.value > 300) {
                 if (audioPlayed === false) {
                     audioPlayed = true;
                 }
-                const hired = new Image();
-                hired.src = "img/hired.png"
+                
                 ctx.drawImage(hired, 0, 0, 400, 400, this.x + 15, this.y + 45, 110, 110)
             } else {
                 if (audioPlayed === false) {
                     audioPlayed = true;
                 }
-                const theworst = new Image();
-                theworst.src = "img/theworst.png";
+                
                 ctx.drawImage(theworst, 0, 0, 400, 400, this.x + 15, this.y + 40, 120, 120) 
             }
         }
@@ -333,7 +338,7 @@ const drawPianos = {
                 this.position.shift();
                 let randomNumber = Math.floor(Math.random() * 3 + 0)
                 // console.log(pianos.src)
-                // pianos.src = "../img/piano1.png"
+                pianos.src = "../../img/piano1.png"
                 console.log(pianos.src)
                 score.value += .1;
                 COIN.play();
