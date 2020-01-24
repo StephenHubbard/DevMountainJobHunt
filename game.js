@@ -45,10 +45,10 @@ const icons_src = [
     postgresql = "img/postgres-icon.png"
 ]
 
-let pianos = new Image();
+const pianos = new Image();
 pianos.src = "img/piano1.png";
 
-let pianos_src = [
+const pianos_src = [
     one = "img/piano1.png",
     two = "img/piano2.png",
     three = "img/piano3.png"
@@ -243,6 +243,15 @@ const getReady = {
     
 }
 
+const crystalball = new Image();
+crystalball.src = "img/crystalball.png"
+
+const hired = new Image();
+hired.src = "img/hired.png"
+
+const theworst = new Image();
+theworst.src = "img/theworst.png";
+
 // GAME OVER MESSAGE
 const gameOver = {
     sX : 175,
@@ -260,22 +269,19 @@ const gameOver = {
                 if (audioPlayed === false) {
                     audioPlayed = true;
                 }
-                let crystalball = new Image();
-                crystalball.src = "img/crystalball.png"
+                
                 ctx.drawImage(crystalball, 0, 0, 400, 400, this.x + 15, this.y + 45, 110, 110)
             } else if (score.value > 300) {
                 if (audioPlayed === false) {
                     audioPlayed = true;
                 }
-                let hired = new Image();
-                hired.src = "img/hired.png"
+                
                 ctx.drawImage(hired, 0, 0, 400, 400, this.x + 15, this.y + 45, 110, 110)
             } else {
                 if (audioPlayed === false) {
                     audioPlayed = true;
                 }
-                let theworst = new Image();
-                theworst.src = "img/theworst.png";
+                
                 ctx.drawImage(theworst, 0, 0, 400, 400, this.x + 15, this.y + 40, 120, 120) 
             }
         }
@@ -331,7 +337,7 @@ const drawPianos = {
                 this.position.shift();
                 let randomNumber = Math.floor(Math.random() * 3 + 0)
                 // console.log(pianos.src)
-                pianos.src = pianos_src[randomNumber]
+                // pianos.src = pianos_src[randomNumber]
                 // console.log(pianos.src)
                 score.value += .1;
                 COIN.play();
