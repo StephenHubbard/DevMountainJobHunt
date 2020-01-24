@@ -46,14 +46,15 @@ const icons_src = [
     postgresql = "img/postgres-icon.png"
 ]
 
-const pianos = new Image();
-pianos.src = "";
 
 const pianos_src = [
     one = "img/piano1.png",
     two = "img/piano2.png",
     three = "img/piano3.png"
 ]
+
+const pianos = new Image();
+pianos.src = pianos_src[2];
 
 const devMtnLogo = new Image();
 devMtnLogo.src = "img/devmountain-logo.png";
