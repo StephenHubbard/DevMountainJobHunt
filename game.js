@@ -332,7 +332,7 @@ const drawPianos = {
             if((p.x + 50)+ this.w <= 0){
                 this.position.shift();
                 let randomNumber = Math.floor(Math.random() * 3 + 0)
-                pianos.src = "./img/piano1.png"
+                pianos.src = "../img/piano1.png"
                 score.value += .1;
                 COIN.play();
             }
