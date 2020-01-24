@@ -337,7 +337,7 @@ const drawPianos = {
                 this.position.shift();
                 let randomNumber = Math.floor(Math.random() * 3 + 0)
                 // console.log(pianos.src)
-                // pianos.src = pianos_src[randomNumber]
+                pianos.src = pianos_src[randomNumber]
                 // console.log(pianos.src)
                 score.value += .1;
                 COIN.play();
