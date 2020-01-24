@@ -55,13 +55,13 @@ const icons_src = [
 ]
 
 
-const pianos_src = [
+let pianos_src = [
     one = "img/piano1.png",
     two = "img/piano2.png",
     three = "img/piano3.png"
 ]
 
-const pianos = new Image();
+let pianos = new Image();
 pianos.src = pianos_src[2];
 
 const devMtnLogo = new Image();
@@ -338,7 +338,7 @@ const drawPianos = {
                 this.position.shift();
                 let randomNumber = Math.floor(Math.random() * 3 + 0)
                 // console.log(pianos.src)
-                pianos.src = "../../img/piano1.png"
+                pianos.src = pianos_src[randomNumber]
                 console.log(pianos.src)
                 score.value += .1;
                 COIN.play();
