@@ -244,13 +244,13 @@ const getReady = {
 }
 
 const crystalball = new Image();
-crystalball.src = "img/crystalball.png"
+crystalball.src = "public/crystalball.png"
 
 const hired = new Image();
-hired.src = "img/hired.png"
+hired.src = "public/hired.png"
 
 const theworst = new Image();
-theworst.src = "img/theworst.png";
+theworst.src = "public/theworst.png";
 
 // GAME OVER MESSAGE
 const gameOver = {
