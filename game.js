@@ -31,7 +31,6 @@ const DIE = new Audio();
 DIE.src = "audio/sfx_die.wav";
 
 
-
 const icons = new Image();
 icons.src = "img/html5-icon.png"
 
@@ -46,14 +45,14 @@ const icons_src = [
     postgresql = "img/postgres-icon.png"
 ]
 
+let pianos = new Image();
+pianos.src = "img/piano1.png";
+
 const pianos_src = [
     one = "img/piano1.png",
     two = "img/piano2.png",
     three = "img/piano3.png"
 ]
-
-let pianos = new Image();
-pianos.src = pianos_src[2];
 
 const devMtnLogo = new Image();
 devMtnLogo.src = "img/devmountain-logo.png";
@@ -332,7 +331,7 @@ const drawPianos = {
                 this.position.shift();
                 let randomNumber = Math.floor(Math.random() * 3 + 0)
                 // console.log(pianos.src)
-                // pianos.src = pianos_src[randomNumber]
+                pianos.src = pianos_src[randomNumber]
                 // console.log(pianos.src)
                 score.value += .1;
                 COIN.play();
