@@ -30,14 +30,6 @@ SWOOSHING.src = "audio/sfx_swooshing.wav";
 const DIE = new Audio();
 DIE.src = "audio/sfx_die.wav";
 
-const crystalball = new Image();
-crystalball.src = "img/crystalball.png";
-
-const hired = new Image();
-hired.src = "img/hired.png";
-
-const theworst = new Image();
-theworst.src = "img/theworst.png";
 
 
 const icons = new Image();
@@ -54,8 +46,7 @@ const icons_src = [
     postgresql = "img/postgres-icon.png"
 ]
 
-
-let pianos_src = [
+const pianos_src = [
     one = "img/piano1.png",
     two = "img/piano2.png",
     three = "img/piano3.png"
@@ -269,20 +260,23 @@ const gameOver = {
             if(score.value > 100 && score.value < 300) {
                 if (audioPlayed === false) {
                     audioPlayed = true;
-                    
                 }
+                let crystalball = new Image();
+                crystalball.src = "img/crystalball.png"
                 ctx.drawImage(crystalball, 0, 0, 400, 400, this.x + 15, this.y + 45, 110, 110)
             } else if (score.value > 300) {
                 if (audioPlayed === false) {
                     audioPlayed = true;
                 }
-                
+                let hired = new Image();
+                hired.src = "img/hired.png"
                 ctx.drawImage(hired, 0, 0, 400, 400, this.x + 15, this.y + 45, 110, 110)
             } else {
                 if (audioPlayed === false) {
                     audioPlayed = true;
                 }
-                
+                let theworst = new Image();
+                theworst.src = "img/theworst.png";
                 ctx.drawImage(theworst, 0, 0, 400, 400, this.x + 15, this.y + 40, 120, 120) 
             }
         }
@@ -337,7 +331,7 @@ const drawPianos = {
             if((p.x + 50)+ this.w <= 0){
                 this.position.shift();
                 let randomNumber = Math.floor(Math.random() * 3 + 0)
-                // console.log(pianos.src)
+                console.log(pianos.src)
                 pianos.src = pianos_src[randomNumber]
                 console.log(pianos.src)
                 score.value += .1;
