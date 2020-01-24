@@ -46,12 +46,12 @@ const icons_src = [
 ]
 
 const pianos = new Image();
-pianos.src = "img/piano1.png";
+pianos.src = "public/piano1.png";
 
 const pianos_src = [
-    one = "img/piano1.png",
-    two = "img/piano2.png",
-    three = "img/piano3.png"
+    one = "public/piano1.png",
+    two = "public/piano2.png",
+    three = "public/piano3.png"
 ]
 
 const devMtnLogo = new Image();
