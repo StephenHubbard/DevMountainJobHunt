@@ -331,9 +331,9 @@ const drawPianos = {
             if((p.x + 50)+ this.w <= 0){
                 this.position.shift();
                 let randomNumber = Math.floor(Math.random() * 3 + 0)
-                console.log(pianos.src)
-                pianos.src = pianos_src[randomNumber]
-                console.log(pianos.src)
+                // console.log(pianos.src)
+                // pianos.src = pianos_src[randomNumber]
+                // console.log(pianos.src)
                 score.value += .1;
                 COIN.play();
             }
